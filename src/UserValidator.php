@@ -9,7 +9,7 @@ class UserValidator
 {
     public function validateEmail(string $email): bool
     {
-        return preg_match(Email::PATTERN, $email);
+        return preg_match(Email::PATTERN, $email) === 1;
     }
 
     public function validatePassword(string $password): bool
