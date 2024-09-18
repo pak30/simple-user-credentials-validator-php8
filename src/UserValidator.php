@@ -26,15 +26,11 @@ class UserValidator
             return false;
         }
 
-        if (! $this->hasDigits($password)) {
+        if (! $this->hasDigit($password)) {
             return false;
         }
 
-        if (! $this->hasSpecialCharacters($password)) {
-            return false;
-        }
-
-        return true;
+        return $this->hasSpecialCharacter($password);
     }
 
     private function hasMinLength(string $password): bool
@@ -46,35 +42,29 @@ class UserValidator
 
     private function hasLowercaseLetter(string $password): bool
     {
-        $pattern = Password::HAS_LOWERCASE;
+        $pattern = Password::HAS_LOWERCASE_LETTER;
 
         return preg_match($pattern, $password) === 1;
     }
     
     private function hasUppercaseLetter(string $password): bool
     {
-        $pattern = Password::HAS_UPPERCASE;
+        $pattern = Password::HAS_UPPERCASE_LETTER;
 
         return preg_match($pattern, $password) === 1;
     }
 
-    private function hasDigits(string $password): bool
+    private function hasDigit(string $password): bool
     {
-        $pattern = Password::HAS_DIGITS;
+        $pattern = Password::HAS_DIGIT;
 
         return preg_match($pattern, $password) === 1;
     }
 
-    private function hasSpecialCharacters(string $password): bool
+    private function hasSpecialCharacter(string $password): bool
     {
-        $hasWhitespacesPattern = Password::HAS_WHITESPACES;
+        $pattern = Password::HAS_SPECIAL_CHARACTER;
 
-        if (preg_match($hasWhitespacesPattern, $password) === 1) {
-            return true;
-        }
-
-        $hasSpecialCharactersPattern = Password::HAS_SPECIAL_CHARACTERS;
-
-        return preg_match($hasSpecialCharactersPattern, $password) === 1;
+        return preg_match($pattern, $password) === 1;
     }
 }
