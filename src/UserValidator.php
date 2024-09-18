@@ -30,11 +30,7 @@ class UserValidator
             return false;
         }
 
-        if (! $this->hasSpecialCharacters($password)) {
-            return false;
-        }
-
-        return true;
+        return $this->hasSpecialCharacter($password);
     }
 
     private function hasMinLength(string $password): bool
@@ -67,14 +63,8 @@ class UserValidator
 
     private function hasSpecialCharacters(string $password): bool
     {
-        $hasWhitespacesPattern = Password::HAS_WHITESPACES;
+        $pattern = Password::HAS_SPECIAL_CHARACTERS;
 
-        if (preg_match($hasWhitespacesPattern, $password) === 1) {
-            return true;
-        }
-
-        $hasSpecialCharactersPattern = Password::HAS_SPECIAL_CHARACTERS;
-
-        return preg_match($hasSpecialCharactersPattern, $password) === 1;
+        return preg_match($pattern, $password) === 1;
     }
 }
