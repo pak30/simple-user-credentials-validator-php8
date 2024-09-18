@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    stopOnFailure="true"
+    testdox="true"
+>
+    <testsuites>
+        <testsuite name="unit">
+            <directory>tests/unit</directory>
+        </testsuite>
+    </testsuites>
+
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
+
+    <coverage
+        includeUncoveredFiles="true"
+        pathCoverage="true"
+    >
+        <report>
+            <html outputDirectory="tests/coverage/html" />
+        </report>
+    </coverage>
+
+    <logging>
+        <testdoxText outputFile="log.txt" />
+    </logging>
+</phpunit>
